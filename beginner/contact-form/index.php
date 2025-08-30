@@ -9,32 +9,24 @@ $message = "";
 $empty = [];
 
 // Capture and sanitize inputs
-if (isset($_POST['name'])) {
-    $name = trim(htmlspecialchars($_POST['name']));
-} else {
-    $name = '';
+
+// Function to capture and sanitize form inputs
+function getPostValue($key, $default = '') {
+    if (isset($_POST[$key])) {
+        return trim(htmlspecialchars($_POST[$key]));
+    } else {
+        return $default;
+    }
 }
 
-if (isset($_POST['email'])) {
-    $email = trim(htmlspecialchars($_POST['email']));
-} else {
-    $email = '';
-}
-
-if (isset($_POST['phone'])) {
-    $phone = trim(htmlspecialchars($_POST['phone']));
-} else {
-    $phone = 'phone';
-}
-
-if (isset($_POST['message'])) {
-    $message = trim(htmlspecialchars($_POST['message']));
-} else {
-    $message = 'message';
-}
+// Capture inputs with sanitization
+$name    = getPostValue('name');
+$email   = getPostValue('email');
+$phone   = getPostValue('phone');
+$message = getPostValue('message');
 
 // Validations
-
+$errors = [];
 // Email validation
 if (empty($email)) {
     $errors['email'] = "Email is required";
