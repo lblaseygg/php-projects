@@ -50,8 +50,8 @@ if (empty($name)) {
 }
 
 // Phone validation
-if (!empty($phone) && !ctype_digit($phone)) {
-    $errors["phone"] = "Phone must contain only digits";
+if (empty($phone) || !ctype_digit($phone)) {
+    $errors["phone"] = "Phone is required and must contain only digits";
 }
 
 // Message Validation
