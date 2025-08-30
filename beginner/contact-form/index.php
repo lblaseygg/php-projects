@@ -1,6 +1,6 @@
 <?php
 
-var_dump($_POST);
+//var_dump($_POST);
 // Initializing Variables
 $name = "";
 $phone = "";
@@ -62,12 +62,12 @@ if (empty($message)) {
 // Confirms the form was submitted
 if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($errors)) {
     // success
-    echo"Thank you, your message has been submitted!";
+    echo"<p class='success'>Thank you, your message has been submitted!</p>";
 }
 
 
 // debugging
-var_dump($name, $email, $phone, $message, $errors);
+//var_dump($name, $email, $phone, $message, $errors);
 ?>
 
 
@@ -76,29 +76,48 @@ var_dump($name, $email, $phone, $message, $errors);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact form validation</title>
+    <title>Contact Form Validation</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error { color: red; margin: 0; }
+    </style>
 </head>
 <body>
-    <p>Contact form validation using PHP</p>
+    <h2>Contact Form Validation Using PHP</h2>
     <form method="post">
+        <!-- Name -->
         <label for="name">Name:</label><br>
-        <input placeholder="Enter your name" type="text" name="name" required><br><br>
+        <input placeholder="Enter your name" type="text" name="name" value="<?php echo $name; ?>" required><br>
+        <?php if (isset($errors['name'])): ?>
+            <p class="error"><?php echo $errors['name']; ?></p>
+        <?php endif; ?>
+        <br>
 
+        <!-- Phone -->
         <label for="phone">Phone:</label><br>
-        <input placeholder="Enter your phone" type="phone" name="phone" required><br><br>
+        <input placeholder="Enter your phone" type="text" name="phone" value="<?php echo $phone; ?>" required><br>
+        <?php if (isset($errors['phone'])): ?>
+            <p class="error"><?php echo $errors['phone']; ?></p>
+        <?php endif; ?>
+        <br>
 
+        <!-- Email -->
         <label for="email">Email:</label><br>
-        <input placeholder="Enter your email" type="email" name="email" required><br><br>
+        <input placeholder="Enter your email" type="email" name="email" value="<?php echo $email; ?>" required><br>
+        <?php if (isset($errors['email'])): ?>
+            <p class="error"><?php echo $errors['email']; ?></p>
+        <?php endif; ?>
+        <br>
 
+        <!-- Message -->
         <label for="message">Message:</label><br>
-        <textarea  
-            name="message" 
-            rows="5" 
-            cols="40" 
-            placeholder="Write your message here..."
-            required
-        ></textarea>
-        <input type="submit">
+        <textarea name="message" rows="5" cols="40" placeholder="Write your message here..." required><?php echo $message; ?></textarea><br>
+        <?php if (isset($errors['message'])): ?>
+            <p class="error"><?php echo $errors['message']; ?></p>
+        <?php endif; ?>
+        <br>
+
+        <input type="submit" value="Submit">
     </form>
 </body>
 </html>
