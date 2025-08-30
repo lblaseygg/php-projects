@@ -67,15 +67,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($errors)) {
     $to = "youremailhere";
     $subject = "New contact form submission";
     mail($to, $subject, $messageBody, $headers);
+
+    $entry = "Name: $name\n";
+    $entry .= "Email: $email\n";
+    $entry .= "Phone: $phone\n";
+    $entry .= "Message $message\n";
+    $entry .= "----------------------\n";
+
+    file_put_contents("submissions.txt", $entry, FILE_APPEND);
 }
 
 // email function will only work on a server with working mail transfer
 
-$entry = "Name: $name\n";
-$entry .= "Email: $email\n";
-$entry .= "Phone: $phone\n";
-$entry .= "Message $message\n";
-$entry .= "----------------------\n";
+
 
 // debugging
 //var_dump($name, $email, $phone, $message, $errors);
