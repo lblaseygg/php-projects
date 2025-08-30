@@ -63,13 +63,24 @@ if (empty($message)) {
 if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($errors)) {
     // success
     echo"<p class='success'>Thank you, your message has been submitted!</p>";
+
+    // Build message body and headers
+    $messageBody = "Name: $name\n";
+    $messageBody .= "Email: $email\n";
+    $messageBody .= "Phone: $phone\n";
+    $messageBody .= "Message: $message\n";
+    $headers = "From: $email";
+
+
+    // Send email
+    $to = "justblasey@gmail.com";
+    $subject = "New contact form submission";
+    mail($to, $subject, $messageBody, $headers);
 }
 
-$messageBody = "Name: $name\n";
-$messageBody .= "Email: $email\n";
-$messageBody .= "Phone: $phone\n";
-$messageBody .= "Message: $message\n";
-$headers = "From: $email";
+
+
+
 // debugging
 //var_dump($name, $email, $phone, $message, $errors);
 ?>
@@ -87,8 +98,8 @@ $headers = "From: $email";
     </style>
 </head>
 <body>
-    <h2>Contact Form Validation Using PHP</h2>
     <form method="post">
+        <h2>Contact Form Validation Using PHP</h2>
         <!-- Name -->
         <label for="name">Name:</label><br>
         <input placeholder="Enter your name" type="text" name="name" value="<?php echo $name; ?>" required><br>
