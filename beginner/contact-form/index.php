@@ -1,4 +1,6 @@
 <?php
+
+//Checking if form fields exist and capturing form inputs and sanitizing them
 if (isset($_POST['name'])) {
     $name = trim(htmlspecialchars($_POST['name']));
 } else {
@@ -23,6 +25,26 @@ if (isset($_POST['message'])) {
     $message = 'message';
 }
 
+// Email validation
+if (empty($email)) {
+    $errors['email'] = "Email is required";
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors["email"] = "Invalid email format";
+}
+
+// Name validation
+if (empty($name)) {
+    $errors["name"] = "Name is required";
+} elseif (strlen($name) < 2) {
+    $errors["name"] = "Name must be at least 2 characters long";
+}
+
+// Confirms the form was submitted
+if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($errors)) {
+    // success
+    echo"Thank you, your message has been submitted!";
+
+}
 var_dump($name, $email, $phone, $message);
 
 
