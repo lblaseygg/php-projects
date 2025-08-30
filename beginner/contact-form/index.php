@@ -65,7 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($errors)) {
     echo"<p class='success'>Thank you, your message has been submitted!</p>";
 }
 
-
+$messageBody = "Name: $name\n";
+$messageBody .= "Email: $email\n";
+$messageBody .= "Phone: $phone\n";
+$messageBody .= "Message: $message\n";
+$headers = "From: $email";
 // debugging
 //var_dump($name, $email, $phone, $message, $errors);
 ?>
