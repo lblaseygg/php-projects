@@ -8,7 +8,6 @@ $email = "";
 $message = "";
 $empty = [];
 
-// Capture and sanitize inputs
 
 // Function to capture and sanitize form inputs
 function getPostValue($key, $default = '') {
@@ -72,6 +71,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($errors)) {
 
 // email function will only work on a server with working mail transfer
 
+$entry = "Name: $name\n";
+$entry .= "Email: $email\n";
+$entry .= "Phone: $phone\n";
+$entry .= "Message $message\n";
+$entry .= "----------------------\n";
 
 // debugging
 //var_dump($name, $email, $phone, $message, $errors);
