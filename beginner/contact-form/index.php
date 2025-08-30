@@ -73,12 +73,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($errors)) {
 
 
     // Send email
-    $to = "justblasey@gmail.com";
+    $to = "youremailhere";
     $subject = "New contact form submission";
     mail($to, $subject, $messageBody, $headers);
 }
 
-
+// email function will only work on a server with working mail transfer
 
 
 // debugging
