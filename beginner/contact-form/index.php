@@ -1,6 +1,12 @@
 <?php
+// Initializing Variables
+$name = "";
+$phone = "";
+$email = "";
+$message = "";
+$empty = [];
 
-//Checking if form fields exist and capturing form inputs and sanitizing them
+// Capture and sanitize inputs
 if (isset($_POST['name'])) {
     $name = trim(htmlspecialchars($_POST['name']));
 } else {
@@ -25,6 +31,8 @@ if (isset($_POST['message'])) {
     $message = 'message';
 }
 
+// Validations
+
 // Email validation
 if (empty($email)) {
     $errors['email'] = "Email is required";
@@ -39,13 +47,25 @@ if (empty($name)) {
     $errors["name"] = "Name must be at least 2 characters long";
 }
 
+// Phone validation
+if (empty($phone)) {
+    $errors["phone"] = "Phone must contain only digits";
+}
+
+// Message Validation
+if (empty($message)) {
+    $errors["message"] = "Message must be at least 10 characters long";
+}
+
 // Confirms the form was submitted
 if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($errors)) {
     // success
     echo"Thank you, your message has been submitted!";
-
 }
-var_dump($name, $email, $phone, $message);
+
+
+// debugging
+var_dump($name, $email, $phone, $message, $errors);
 
 
 
