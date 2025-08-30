@@ -1,4 +1,6 @@
 <?php
+
+var_dump($_POST);
 // Initializing Variables
 $name = "";
 $phone = "";
@@ -48,7 +50,7 @@ if (empty($name)) {
 }
 
 // Phone validation
-if (empty($phone)) {
+if (!empty($phone) && !ctype_digit($phone)) {
     $errors["phone"] = "Phone must contain only digits";
 }
 
@@ -66,11 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($errors)) {
 
 // debugging
 var_dump($name, $email, $phone, $message, $errors);
-
-
-
-
-
 ?>
 
 
