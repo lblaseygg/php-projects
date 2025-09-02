@@ -13,11 +13,6 @@ if (!isset($_SESSION['tasks'])) {
 
  // Get all tasks
  $tasks = $_SESSION['tasks'];
-
- // To display tasks
- foreach ($_SESSION['tasks'] as $task) {
-    echo "<li>" . htmlspecialchars($task) ."</li>";
- }
 ?>
 
 <!DOCTYPE html>
@@ -34,3 +29,9 @@ if (!isset($_SESSION['tasks'])) {
     </form>
 </body>
 </html>
+<?php 
+ // To display tasks
+ foreach ($_SESSION['tasks'] as $task) {
+    echo "<li>" . htmlspecialchars($task) ."</li>";
+ }
+?>
