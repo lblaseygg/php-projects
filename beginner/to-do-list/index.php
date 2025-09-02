@@ -8,7 +8,8 @@ if (!isset($_SESSION['tasks'])) {
 
 // Add a task if form is submitted
  if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['task'])) {
-    $_SESSION['tasks'][] = $_POST['task'];
+    $task = htmlspecialchars($_POST['task']); // sanitize input
+    $_SESSION['tasks'][] = $_POST['task']; // add to session array
  }
 
  // Get all tasks
@@ -24,14 +25,15 @@ if (!isset($_SESSION['tasks'])) {
 </head>
 <body>
     <form method="post">
-        <input type="text" name="task" placeholder="Enter your task here">
-        <input type="submit">
-    </form>
+    <input type="text" name="task" placeholder="Enter your task here">
+    <input type="submit" value="Add Task">
+</form>
+
+<ul>
+    <?php foreach ($_SESSION['tasks'] as $t): ?>
+        <li><?= $t ?></li>
+    <?php endforeach; ?>
+</ul>
+
 </body>
 </html>
-<?php 
- // To display tasks
- foreach ($_SESSION['tasks'] as $task) {
-    echo "<li>" . htmlspecialchars($task) ."</li>";
- }
-?>
